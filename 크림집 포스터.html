@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Instagram Post UI</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #fafafa;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 40px 12px;
+  }
+
+  .post {
+    width: 400px;
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  /* Header */
+  .post-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+  }
+  .avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+    padding: 2px;
+    flex-shrink: 0;
+  }
+  .avatar-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #fff url('https://scontent-icn2-1.cdninstagram.com/v/t51.2885-19/445581757_2662596933918801_7000806808101094378_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=108&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDAwLkMzIn0%3D&_nc_ohc=8yfNcBdG940Q7kNvwEaJ8xp&_nc_oc=AdrAFWYm53Uhj7bqrOeCJSO5xCVuR4GVjN2tKOp9nkF0dZCdPIhtlJkluDVqLcoNs50&_nc_zt=24&_nc_ht=scontent-icn2-1.cdninstagram.com&_nc_ss=7b6a8&oh=00_AQAphQON8FoTHX9DsZvT4SSRonRbT3iAwVSBc2CJhkD5_A&oe=6A6A63EE') center/cover;
+    border: 2px solid #fff;
+  }
+  .user-meta {
+    margin-left: 10px;
+    line-height: 1.15;
+  }
+  .username {
+    font-size: 14px;
+    font-weight: 600;
+    color: #262626;
+  }
+  .location {
+    font-size: 12px;
+    color: #8e8e8e;
+  }
+  .more-btn {
+    margin-left: auto;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .more-btn svg { display: block; }
+
+  /* Image */
+  .post-image {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    background: #efefef url('https://raw.githubusercontent.com/seoyeon0119/Portfolio/refs/heads/main/%EB%A0%88%EB%93%9C%20%EC%8D%B8%EB%A8%B8%2001.png') center/cover no-repeat;
+    display: block;
+  }
+
+  /* Actions */
+  .actions {
+    display: flex;
+    align-items: center;
+    padding: 8px 10px 0;
+  }
+  .actions-left {
+    display: flex;
+    gap: 14px;
+  }
+  .actions button {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    line-height: 0;
+  }
+  .icon { width: 24px; height: 24px; stroke: #262626; fill: none; stroke-width: 1.8; }
+  .save-btn { margin-left: auto; }
+
+  .heart.liked { stroke: #ed4956; fill: #ed4956; }
+
+  /* Likes */
+  .likes {
+    padding: 6px 12px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #262626;
+  }
+
+  /* Caption */
+  .caption {
+    padding: 6px 12px 0;
+    font-size: 14px;
+    color: #262626;
+    line-height: 1.4;
+  }
+  .caption .username { font-weight: 600; margin-right: 4px; }
+  .caption .username { display: inline; }
+
+  .hashtags { color: #00376b; text-decoration: none; }
+
+  .comments-link {
+    display: block;
+    padding: 6px 12px 0;
+    font-size: 13.5px;
+    color: #8e8e8e;
+    cursor: pointer;
+  }
+
+  .timestamp {
+    padding: 6px 12px 0;
+    font-size: 10px;
+    letter-spacing: 0.2px;
+    color: #8e8e8e;
+    text-transform: uppercase;
+  }
+
+  /* Add comment row */
+  .add-comment {
+    display: flex;
+    align-items: center;
+    padding: 10px 12px 14px;
+    border-top: 1px solid #efefef;
+    margin-top: 8px;
+  }
+  .add-comment input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: #262626;
+  }
+  .add-comment input::placeholder { color: #8e8e8e; }
+  .post-comment-btn {
+    background: none;
+    border: none;
+    color: #00376b;
+    font-weight: 600;
+    font-size: 14px;
+    opacity: 0.3;
+    cursor: default;
+  }
+</style>
+</head>
+<body>
+
+<div class="post">
+
+  <div class="post-header">
+    <div class="avatar"><div class="avatar-inner"></div></div>
+    <div class="user-meta">
+      <div class="username">cafe_creamzip</div>
+      <div class="location">광주, 대한민국</div>
+    </div>
+    <div class="more-btn">
+      <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.2" stroke-width="1" fill="#262626"/><circle cx="12" cy="12" r="1.2" stroke-width="1" fill="#262626"/><circle cx="12" cy="19" r="1.2" stroke-width="1" fill="#262626"/></svg>
+    </div>
+  </div>
+
+  <img class="post-image" src="https://raw.githubusercontent.com/seoyeon0119/Portfolio/refs/heads/main/%EB%A0%88%EB%93%9C%20%EC%8D%B8%EB%A8%B8%2001.png" alt="레드 썸머 포스터">
+
+  <div class="actions">
+    <div class="actions-left">
+      <button aria-label="좋아요" onclick="toggleLike(this)">
+        <svg class="icon heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.7-10-9.3C0.3 8.1 2 4 6 4c2.2 0 3.8 1.3 6 3.5C14.2 5.3 15.8 4 18 4c4 0 5.7 4.1 4 7.7C19.5 16.3 12 21 12 21z"/></svg>
+      </button>
+      <button aria-label="댓글">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M20.5 12c0 4.4-3.8 8-8.5 8-1.2 0-2.4-.2-3.4-.7L3.5 20.5l1.3-4.8C4.3 14.6 3.5 13.4 3.5 12c0-4.4 3.8-8 8.5-8s8.5 3.6 8.5 8z"/></svg>
+      </button>
+      <button aria-label="공유">
+        <svg class="icon" viewBox="0 0 24 24"><line x1="22" y1="2" x2="9.2" y2="14.8"/><polygon points="22 2 15.2 22 9.2 14.8 2 9 22 2"/></svg>
+      </button>
+    </div>
+    <button class="save-btn" aria-label="저장">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg>
+    </button>
+  </div>
+
+  <div class="caption">
+    <a class="hashtags" href="https://www.instagram.com/explore/tags/%ED%8F%AC%EC%8A%A4%ED%84%B0/" target="_blank" rel="noopener">#포스터</a> <a class="hashtags" href="https://www.instagram.com/explore/tags/AI/" target="_blank" rel="noopener">#AI</a> <a class="hashtags" href="https://www.instagram.com/explore/tags/%ED%8E%B8%EC%A7%91/" target="_blank" rel="noopener">#편집</a>
+  </div>
+
+  <div class="timestamp">2시간 전</div>
+
+  <div class="add-comment">
+    <input type="text" placeholder="댓글 달기...">
+    <button class="post-comment-btn">게시</button>
+  </div>
+
+</div>
+
+<script>
+  function toggleLike(btn) {
+    btn.querySelector('.heart').classList.toggle('liked');
+  }
+</script>
+
+</body>
+</html>
